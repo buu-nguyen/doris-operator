@@ -13,7 +13,7 @@ Resource Types:
 <h3 id="disaggregated.cluster.doris.com/v1.AvailableStatus">AvailableStatus
 (<code>string</code> alias)</h3>
 <p>
-(<em>Appears on:</em><a href="#disaggregated.cluster.doris.com/v1.ComputeClusterStatus">ComputeClusterStatus</a>, <a href="#disaggregated.cluster.doris.com/v1.FEStatus">FEStatus</a>)
+(<em>Appears on:</em><a href="#disaggregated.cluster.doris.com/v1.ComputeClusterStatus">ComputeClusterStatus</a>, <a href="#disaggregated.cluster.doris.com/v1.FEStatus">FEStatus</a>, <a href="#disaggregated.cluster.doris.com/v1.MetaServiceStatus">MetaServiceStatus</a>)
 </p>
 <div>
 </div>
@@ -109,7 +109,7 @@ int32
 <h3 id="disaggregated.cluster.doris.com/v1.CommonSpec">CommonSpec
 </h3>
 <p>
-(<em>Appears on:</em><a href="#disaggregated.cluster.doris.com/v1.ComputeCluster">ComputeCluster</a>, <a href="#disaggregated.cluster.doris.com/v1.FeSpec">FeSpec</a>)
+(<em>Appears on:</em><a href="#disaggregated.cluster.doris.com/v1.ComputeCluster">ComputeCluster</a>, <a href="#disaggregated.cluster.doris.com/v1.FeSpec">FeSpec</a>, <a href="#disaggregated.cluster.doris.com/v1.MetaService">MetaService</a>)
 </p>
 <div>
 </div>
@@ -148,7 +148,7 @@ string
 <td>
 <code>imagePullSecrets</code><br/>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#localobjectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#localobjectreference-v1-core">
 []Kubernetes core/v1.LocalObjectReference
 </a>
 </em>
@@ -175,7 +175,7 @@ int32
 <td>
 <code>ResourceRequirements</code><br/>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#resourcerequirements-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#resourcerequirements-v1-core">
 Kubernetes core/v1.ResourceRequirements
 </a>
 </em>
@@ -214,7 +214,7 @@ set by external tools to store and retrieve arbitrary metadata.</p>
 <td>
 <code>affinity</code><br/>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#affinity-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#affinity-v1-core">
 Kubernetes core/v1.Affinity
 </a>
 </em>
@@ -252,7 +252,7 @@ bool
 <td>
 <code>tolerations</code><br/>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#toleration-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#toleration-v1-core">
 []Kubernetes core/v1.Toleration
 </a>
 </em>
@@ -315,7 +315,7 @@ string
 <td>
 <code>hostAliases</code><br/>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#hostalias-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#hostalias-v1-core">
 []Kubernetes core/v1.HostAlias
 </a>
 </em>
@@ -330,7 +330,7 @@ file if specified. This is only valid for non-hostNetwork pods.</p>
 <td>
 <code>securityContext</code><br/>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#podsecuritycontext-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#podsecuritycontext-v1-core">
 Kubernetes core/v1.PodSecurityContext
 </a>
 </em>
@@ -344,7 +344,7 @@ Kubernetes core/v1.PodSecurityContext
 <td>
 <code>containerSecurityContext</code><br/>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#securitycontext-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#securitycontext-v1-core">
 Kubernetes core/v1.SecurityContext
 </a>
 </em>
@@ -358,7 +358,7 @@ Kubernetes core/v1.SecurityContext
 <td>
 <code>envVars</code><br/>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#envvar-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#envvar-v1-core">
 []Kubernetes core/v1.EnvVar
 </a>
 </em>
@@ -417,7 +417,7 @@ string
 </em>
 </td>
 <td>
-<p>ClusterId is the identifier of computeCluster, this will distinguish all computeCluster in meta.</p>
+<p>ClusterId is the identifier of computeCluster, this will distinguish all com puteCluster in meta.</p>
 </td>
 </tr>
 <tr>
@@ -587,45 +587,6 @@ key in configMap&rsquo;s data is file name.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="disaggregated.cluster.doris.com/v1.DisMS">DisMS
-</h3>
-<p>
-(<em>Appears on:</em><a href="#disaggregated.cluster.doris.com/v1.DorisDisaggregatedClusterSpec">DorisDisaggregatedClusterSpec</a>)
-</p>
-<div>
-</div>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>namespace</code><br/>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Namespace specify the namespace of metaservice deployed.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>name</code><br/>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Name specify the name of metaservice resource.</p>
-</td>
-</tr>
-</tbody>
-</table>
 <h3 id="disaggregated.cluster.doris.com/v1.DisaggregatedComponentType">DisaggregatedComponentType
 (<code>string</code> alias)</h3>
 <div>
@@ -647,7 +608,7 @@ string
 <td>
 <code>metadata</code><br/>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -684,10 +645,10 @@ configmap have to config, please reference the doc.</p>
 </tr>
 <tr>
 <td>
-<code>disMS</code><br/>
+<code>metaService</code><br/>
 <em>
-<a href="#disaggregated.cluster.doris.com/v1.DisMS">
-DisMS
+<a href="#disaggregated.cluster.doris.com/v1.MetaService">
+MetaService
 </a>
 </em>
 </td>
@@ -767,10 +728,10 @@ configmap have to config, please reference the doc.</p>
 </tr>
 <tr>
 <td>
-<code>disMS</code><br/>
+<code>metaService</code><br/>
 <em>
-<a href="#disaggregated.cluster.doris.com/v1.DisMS">
-DisMS
+<a href="#disaggregated.cluster.doris.com/v1.MetaService">
+MetaService
 </a>
 </em>
 </td>
@@ -834,24 +795,15 @@ string
 </tr>
 <tr>
 <td>
-<code>msEndpoint</code><br/>
+<code>metaServiceStatus</code><br/>
 <em>
-string
+<a href="#disaggregated.cluster.doris.com/v1.MetaServiceStatus">
+MetaServiceStatus
+</a>
 </em>
 </td>
 <td>
-<p>the ms address for store meta of disaggregated cluster.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>msToken</code><br/>
-<em>
-string
-</em>
-</td>
-<td>
-<p>the token for access ms service.</p>
+<p>describe the metaservice status now.</p>
 </td>
 </tr>
 <tr>
@@ -913,7 +865,7 @@ ClusterHealth
 <td>
 <code>type</code><br/>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#servicetype-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#servicetype-v1-core">
 Kubernetes core/v1.ServiceType
 </a>
 </em>
@@ -946,6 +898,47 @@ map[string]string
 </td>
 <td>
 <p>PortMaps specify node port for target port in pod, when the service type=NodePort.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="disaggregated.cluster.doris.com/v1.FDB">FDB
+</h3>
+<p>
+(<em>Appears on:</em><a href="#disaggregated.cluster.doris.com/v1.MetaService">MetaService</a>)
+</p>
+<div>
+</div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>address</code><br/>
+<em>
+string
+</em>
+</td>
+<td>
+<p>if fdb directly deployed in machine, please add fdb access address which generated in &lsquo;etc/foundationdb/fdb.cluster&rsquo; default.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>configMapNamespaceName</code><br/>
+<em>
+<a href="#disaggregated.cluster.doris.com/v1.NamespaceName">
+NamespaceName
+</a>
+</em>
+</td>
+<td>
+<p>if fdb deployed in kubernetes by fdb-kubernetes-operator, please specify the namespace and configmap&rsquo;s name generated by <code>fdb-kubernetes-operator</code> in deployed fdbcluster namespace.</p>
 </td>
 </tr>
 </tbody>
@@ -1043,6 +1036,153 @@ CommonSpec
 </p>
 <div>
 </div>
+<h3 id="disaggregated.cluster.doris.com/v1.MetaService">MetaService
+</h3>
+<p>
+(<em>Appears on:</em><a href="#disaggregated.cluster.doris.com/v1.DorisDisaggregatedClusterSpec">DorisDisaggregatedClusterSpec</a>)
+</p>
+<div>
+</div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>CommonSpec</code><br/>
+<em>
+<a href="#disaggregated.cluster.doris.com/v1.CommonSpec">
+CommonSpec
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>CommonSpec</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>fdb</code><br/>
+<em>
+<a href="#disaggregated.cluster.doris.com/v1.FDB">
+FDB
+</a>
+</em>
+</td>
+<td>
+<p>specify the address of fdb that used by doris Compute-storage decoupled cluster.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="disaggregated.cluster.doris.com/v1.MetaServiceStatus">MetaServiceStatus
+</h3>
+<p>
+(<em>Appears on:</em><a href="#disaggregated.cluster.doris.com/v1.DorisDisaggregatedClusterStatus">DorisDisaggregatedClusterStatus</a>)
+</p>
+<div>
+</div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>phase</code><br/>
+<em>
+<a href="#disaggregated.cluster.doris.com/v1.Phase">
+Phase
+</a>
+</em>
+</td>
+<td>
+<p>Phase represent the stage of reconciling.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>availableStatus</code><br/>
+<em>
+<a href="#disaggregated.cluster.doris.com/v1.AvailableStatus">
+AvailableStatus
+</a>
+</em>
+</td>
+<td>
+<p>AvailableStatus represents the metaservice available or not.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>metaServiceEndpoint</code><br/>
+<em>
+string
+</em>
+</td>
+<td>
+<p>the meta service address for store meta of disaggregated cluster.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>msToken</code><br/>
+<em>
+string
+</em>
+</td>
+<td>
+<p>the token for access ms service.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="disaggregated.cluster.doris.com/v1.NamespaceName">NamespaceName
+</h3>
+<p>
+(<em>Appears on:</em><a href="#disaggregated.cluster.doris.com/v1.FDB">FDB</a>)
+</p>
+<div>
+</div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>namespace</code><br/>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>name</code><br/>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
 <h3 id="disaggregated.cluster.doris.com/v1.PersistentVolume">PersistentVolume
 </h3>
 <p>
@@ -1063,7 +1203,7 @@ CommonSpec
 <td>
 <code>persistentVolumeClaimSpec</code><br/>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#persistentvolumeclaimspec-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#persistentvolumeclaimspec-v1-core">
 Kubernetes core/v1.PersistentVolumeClaimSpec
 </a>
 </em>
@@ -1113,7 +1253,7 @@ It only takes effect in the first configuration and cannot be added or modified 
 <h3 id="disaggregated.cluster.doris.com/v1.Phase">Phase
 (<code>string</code> alias)</h3>
 <p>
-(<em>Appears on:</em><a href="#disaggregated.cluster.doris.com/v1.ComputeClusterStatus">ComputeClusterStatus</a>, <a href="#disaggregated.cluster.doris.com/v1.FEStatus">FEStatus</a>)
+(<em>Appears on:</em><a href="#disaggregated.cluster.doris.com/v1.ComputeClusterStatus">ComputeClusterStatus</a>, <a href="#disaggregated.cluster.doris.com/v1.FEStatus">FEStatus</a>, <a href="#disaggregated.cluster.doris.com/v1.MetaServiceStatus">MetaServiceStatus</a>)
 </p>
 <div>
 </div>
@@ -1132,6 +1272,8 @@ It only takes effect in the first configuration and cannot be added or modified 
 </tr><tr><td><p>&#34;Reconciling&#34;</p></td>
 <td><p>Creating represents service in creating stage.</p>
 </td>
+</tr><tr><td><p>&#34;ReconclingDropFailed&#34;</p></td>
+<td></td>
 </tr><tr><td><p>&#34;Upgrading&#34;</p></td>
 <td><p>Upgrading represents the spec of the service changed, service in smoothing upgrade.</p>
 </td>
@@ -1284,5 +1426,5 @@ string
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>7d8fdc8</code>.
+on git commit <code>1890404</code>.
 </em></p>
