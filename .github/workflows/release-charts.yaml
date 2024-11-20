@@ -1,0 +1,83 @@
+name: Release Charts
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - helm-v*
+    paths:
+      - charts/**
+      - .github/workflows/release-charts.yaml
+
+  workflow_dispatch:
+
+jobs:
+  release:
+    if: startsWith(github.ref, 'refs/tags/helm-v')
+    runs-on: homelab-runner
+    env:
+      SOURCE_CHARTS_DIR: helm-charts
+      SOURCE_BRANCH: main
+      CHARTS_OWNER: thealtoclef
+      CHARTS_REPO: thealtoclef-charts
+      CHARTS_PAGES_BRANCH: main
+    steps:
+      - name: Get Infisical credentials
+        run: |
+          echo "::add-mask::$INFISICAL_CLIENT_ID"
+          echo "INFISICAL_CLIENT_ID=$INFISICAL_CLIENT_ID" >> $GITHUB_ENV
+          echo "::add-mask::$INFISICAL_CLIENT_SECRET"
+          echo "INFISICAL_CLIENT_SECRET=$INFISICAL_CLIENT_SECRET" >> $GITHUB_ENV
+
+      - name: Ingest CI secrets
+        uses: Infisical/secrets-action@v1.0.7
+        with:
+          client-id: ${{ env.INFISICAL_CLIENT_ID }}
+          client-secret: ${{ env.INFISICAL_CLIENT_SECRET }}
+          env-slug: "prod"
+          project-slug: "homelab-058-n"
+          secret-path: "/ci"
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          path: source
+
+      - name: Checkout Helm charts repo
+        uses: actions/checkout@v4
+        with:
+          path: helm-charts
+          repository: ${{ env.CHARTS_OWNER }}/${{ env.CHARTS_REPO }}
+          token: ${{ env.CR_TOKEN }}
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v4
+
+      - name: Add dependency chart repos
+        working-directory: source
+        run: |
+          for dir in $(ls -d ${{ env.SOURCE_CHARTS_DIR }}/*/); do
+            helm dependency list $dir 2> /dev/null | tail +2 | head -n -1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
+          done
+
+      - name: Run chart-releaser to create release
+        uses: thealtoclef/chart-releaser-action@main
+        env:
+          CR_TOKEN: ${{ env.CR_TOKEN }}
+        with:
+          owner: ${{ env.CHARTS_OWNER }}
+          repo: ${{ env.CHARTS_REPO }}
+          pages_branch: ${{ env.CHARTS_PAGES_BRANCH }}
+          skip_upload: true
+          workdir: source
+          charts_dir: ${{ env.SOURCE_CHARTS_DIR }}
+          commit: ${{ env.SOURCE_BRANCH }}
+
+      - name: Update index.yaml
+        working-directory: helm-charts
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          cr index -o ${{ env.CHARTS_OWNER }} -r ${{ env.CHARTS_REPO }} --pages-branch ${{ env.CHARTS_PAGES_BRANCH }} --package-path ../source/.cr-release-packages --index-path . --push
