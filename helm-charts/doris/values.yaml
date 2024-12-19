@@ -427,6 +427,7 @@ beSpec:
     # - name: native-sidecar
     #   image: alpine:latest
     #   restartPolicy: Always
+  enableWorkloadGroup: ~
 
 cnSpec:
   replicas: 3
@@ -763,3 +764,4 @@ brokerSpec:
     # - name: native-sidecar
     #   image: alpine:latest
     #   restartPolicy: Always
+  kickOffAffinityBe: ~
